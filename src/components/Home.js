@@ -62,6 +62,7 @@ function Home() {
         
           {movies && 
           movies.map((c) => (
+              
             <Col className='col'>
                 <Card className='card'>
                     <Card.Img className='card-image' variant="top" src={c.image} />
