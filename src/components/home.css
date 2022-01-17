@@ -1,0 +1,82 @@
+.searching{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0 1.5rem 0;
+}
+
+.movies{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;  
+    margin-right: auto;  
+    width: 90vw;
+}
+
+.search-field{
+    width: 30rem !important;
+    height: 2rem;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-button{
+    width: 7rem;
+    border: none;
+    margin-top: 0.7rem;
+    border-radius: 4px;
+}
+
+.search-field{
+    width: 20rem;
+}
+
+.result{
+    color: white;
+    font-weight: 200;
+    margin-top: 2rem;
+}
+
+.row{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: 3rem;
+}
+
+.card{
+    height: 29rem;
+    width: 18rem;
+    margin: 1rem auto 0 auto;
+    background-color: #282c34;
+    box-shadow: 0px 0px 12px white;
+}
+
+.card-image{
+    margin-left: auto; 
+    border: 1px solid white; 
+    margin-right: auto; 
+    width: 15rem; 
+    height: 21rem;
+    margin-top: 1.2rem;
+}
+.card-title, .card-text{
+    color: white;
+    font-size: 1rem;
+}
+.card-title{
+    font-size: 1rem !important;
+    text-align: center;
+}
+.card-text{
+    display: flex;
+    margin: 1rem 0.6rem 0 0.6rem; 
+    justify-content: space-between;
+}
+.card-text-search{
+    display: flex;
+    justify-content: center;
+}
