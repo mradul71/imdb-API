@@ -1,36 +1,32 @@
-
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import './movie.css'
 import ItemsCarousel from "react-items-carousel";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { useDispatch, useSelector } from 'react-redux';
+import { cleanPreviousMovieDetails, fetchOneMovie, getMovieDetails } from '../features/movies/movieSlice';
 
 function Movie() {
-    const {id} = useParams();
     const [activeActor, setActiveActor] = useState(0);
     const [activeSimilar, setActiveSimilar] = useState(0);
-    const [movie, setMovie] = useState({});
-    const [actors, setActors] = useState([]);
-    const [similars, setSimilars] = useState([]);
-
-    const fetchMovies = async () => {
-        const data = await axios.get(
-          `https://imdb-api.com/en/API/Title/${process.env.REACT_APP_KEY}/${id}/FullCast,Posters,Images,Ratings,`
-        );
-        console.log(data.data);
-        setMovie(data.data);
-        setActors(data.data.actorList)
-        setSimilars(data.data.similars);
-      };
+    const {id} = useParams();
+    const dispatch = useDispatch();
+    const movie = useSelector(getMovieDetails)
 
     useEffect(() => {
-        fetchMovies();
+        dispatch(fetchOneMovie(id));
         window.scrollTo(0, 0);
-      }, [id]);
+        return dispatch(cleanPreviousMovieDetails());
+      }, [dispatch, id]);
 
     return (
+        <>
+        {
+            Object.keys(movie).length === 0 ? 
+            <div className='loading'>Loading...</div>
+            :
+            (
         <div className='movie' key={movie.id}>
             <div className='upper'>
                 <div className='movie-title'>
@@ -64,6 +60,9 @@ function Movie() {
                     <hr />
                 </div>
             </div>
+
+
+
             <div className='main-headings'>
                 <span className='head-name'>Actors</span><ArrowForwardIosIcon className='icon' />
             </div>
@@ -89,8 +88,8 @@ function Movie() {
                     leftChevron={<ArrowBackIosNewIcon className='icon' />}
                 >
                     {
-                    !actors ? <div>Loading...</div> :
-                    actors.map((actor)=> {
+                    movie.actorList.length <= 0 ? <div className='loading'>Loading...</div> :
+                    movie.actorList.map((actor)=> {
                         if(actor.image !== "https://imdb-api.com/images/original/nopicture.jpg" &&
                             actor.asCharacter.includes("uncredited")!==true){
                                 return (
@@ -134,7 +133,8 @@ function Movie() {
                     leftChevron={<ArrowBackIosNewIcon className='icon' />}
                 >
                     {
-                    !similars ? <div>Loading...</div> : similars.map((similar)=> (
+                    movie.similars.length <= 0 ? <div className='loading'>Loading...</div> :
+                    movie.similars.map((similar)=> (
                         <Link className='links' to={`/movie/${similar.id}`}>
                             <div key={similar.id} className='similar'>
                                 <div className='similar-image'>
@@ -149,7 +149,14 @@ function Movie() {
                     }
                 </ItemsCarousel>
             </div>
+
+
+
         </div>
+                
+                )
+            }
+        </>
     )
 }
 
