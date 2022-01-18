@@ -6,6 +6,15 @@
     padding: 1rem 0 1.5rem 0;
 }
 
+.links{
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.links :hover{
+    color: rgb(87, 153, 239) !important;
+}
+
 .movies{
     display: flex;
     flex-direction: column;
