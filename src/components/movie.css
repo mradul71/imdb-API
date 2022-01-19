@@ -2,12 +2,24 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 2rem;
+    padding-top: 1rem;
     margin-left: auto;
     margin-right: auto;
     width: 80vw;
     color: white;
     font-size: 1.2rem;
+}
+
+.runtime, .rating-val{
+    color: rgb(42, 132, 250);
+    font-weight: 600;
+}
+.extra .year{
+    color: rgb(42, 132, 250);
+    font-weight: 600;
+}
+.imdb-head{
+    font-weight: 600;
 }
 
 .upper{
@@ -42,13 +54,11 @@
 
 .grp{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     margin-top: 2rem;
 }
 .right{
     width: 53rem;
-    
+    padding-left: 2rem;
 }
 .director, .writers{
     color: rgb(87, 153, 239);
@@ -101,6 +111,7 @@
 }
 .actor-image img{
     border: 2px solid white;
+    border-radius: 10%;
     height: 15rem !important;
     width: 11rem !important;
 }
@@ -125,4 +136,324 @@
     border: 4px solid white;
     height: 19rem !important;
     width: 14rem !important;
+}
+
+@media only screen and (max-width: 1410px){
+    .movie{
+        color: white;
+        font-size: 1.1rem;
+    }
+    .name{
+        font-weight: 800;
+        font-size: 2.4rem;
+    }
+    
+    .movie img{
+        height: 25rem;
+        width: 17rem;
+    }
+    .director, .writers{
+        color: rgb(87, 153, 239);
+    }
+    .headings{
+        font-weight: 800;
+        color: white;
+    }
+    .main-headings{
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+    }
+    .similar{
+        font-size: 0.9rem;
+    }
+    .similar-image img{
+        border: none;
+        border: 3px solid white;
+        height: 18rem !important;
+        width: 13rem !important;
+    }
+}
+
+@media only screen and (max-width: 1350px){
+    .headings{
+        font-weight: 800;
+        color: white;
+    }
+    .main-headings{
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        border-left: 0.4rem solid yellow;
+        width: 12rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 1rem;
+    }
+    
+    .icon{
+        font-size: 1.5rem !important;
+    }
+    .similars{
+        margin-bottom: 2rem;
+    }
+    
+    .actor{
+        width: 12rem;
+        justify-content: center;
+        font-size: 1rem;
+    }
+    .actor-image img{
+        height: 13rem !important;
+        width: 9rem !important;
+    }
+    .actor-title, .similar-title{
+        margin-top: 0.4rem;
+    }
+    .similar{
+        font-size: 0.9rem;
+    }
+    .similar-image img{
+        border: none;
+        border: 3px solid white;
+        height: 17rem !important;
+        width: 12rem !important;
+    }
+}
+
+@media only screen and (max-width: 1215px){
+    .name{
+        font-size: 2rem;
+    }
+    .movie img{
+        height: 25rem;
+        width: 16rem;
+    }
+    .main-headings{
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        width: 10rem;
+    }
+    .actor{
+        width: 9rem;
+        font-size: 0.9rem;
+    }
+    .similar{
+        font-size: 0.9rem;
+    }
+    .similar-image img{
+        border: none;
+        border: 3px solid white;
+        height: 16rem !important;
+        width: 11rem !important;
+    }
+}
+
+@media only screen and (max-width: 1110px){
+    .name{
+        font-size: 1.8rem;
+    }
+    .movie img{
+        height: 24rem;
+        width: 15rem;
+    }
+    .main-headings{
+        margin-top: 2.3rem;
+        margin-bottom: 1.3rem;
+    }
+    .actor{
+        width: 7.8rem;
+        justify-content: center;
+        font-size: 0.87rem;
+    }
+    .actor-image img{
+        height: 11rem !important;
+        width: 8rem !important;
+    }
+    .actor-title, .similar-title{
+        margin-top: 0.4rem;
+    }
+    .similar-image img{
+        border: none;
+        border: 3px solid white;
+        height: 13rem !important;
+        width: 9rem !important;
+    }
+}
+
+@media only screen and (max-width: 971px){
+    .name{
+        font-size: 1.8rem;
+    }
+    .movie img{
+        height: 24rem;
+        width: 15rem;
+    }
+    .main-headings{
+        margin-top: 2.3rem;
+        margin-bottom: 1.3rem;
+    }
+    .actor{
+        width: 7.8rem;
+        justify-content: center;
+        font-size: 0.87rem;
+    }
+    .actor-image img{
+        height: 10rem !important;
+        width: 7.5rem !important;
+    }
+    .actor-title, .similar-title{
+        margin-top: 0.4rem;
+    }
+    .similar-image img{
+        border: none;
+        border: 3px solid white;
+        height: 14rem !important;
+        width: 10rem !important;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    .name{
+        font-size: 1.6rem;
+    }
+    .movie img{
+        height: 22rem;
+        width: 14rem;
+    }
+    .main-headings{
+        width: 9rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        padding-left: 0.7rem;
+    }
+    .actor{
+        width: 7.8rem;
+        justify-content: center;
+        font-size: 0.87rem;
+    }
+    .actor-image img{
+        height: 10rem !important;
+        width: 7.5rem !important;
+    }
+    .actor-title, .similar-title{
+        margin-top: 0.4rem;
+    }
+    .similar-image img{
+        border: none;
+        border: 3px solid white;
+        height: 12rem !important;
+        width: 9rem !important;
+    }
+}
+
+@media only screen and (max-width: 740px){
+    .right{
+        font-size: 1rem;
+    }
+    .actor-title, .similar-title{
+        margin-top: 0.3rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 710px){
+    .main-headings{
+        width: 8rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        padding-left: 0.5rem;
+    }
+    .actor{
+        width: 7.8rem;
+        justify-content: center;
+        font-size: 0.87rem;
+    }
+    .similar-image img{
+        border: none;
+        border: 3px solid white;
+        height: 14rem !important;
+        width: 10rem !important;
+    }
+    .similar-title{
+        font-size: 0.9rem;
+    }
+}
+
+@media only screen and (max-width: 655px){
+    .movie-title{
+        font-size: 1rem;
+    }
+    .name{
+        font-size: 1.3rem;
+    }
+    .right{
+        font-size: 0.85rem;
+    }
+    .actor{
+        width: 7.8rem;
+        justify-content: center;
+        font-size: 0.87rem;
+    }
+    .actor-image img{
+        height: 10rem !important;
+        width: 7.5rem !important;
+    }
+    .actor-title, .similar-title{
+        margin-top: 0.4rem;
+    }
+    .similar-image img{
+        border: none;
+        border: 3px solid white;
+        height: 14rem !important;
+        width: 10rem !important;
+    }
+}
+
+@media only screen and (max-width: 595px){
+    .right{
+        font-size: 0.8rem;
+    }
+    .actor-image img{
+        height: 11rem !important;
+        width: 8rem !important;
+    }
+    .similar-image img{
+        border: none;
+        border: 3px solid white;
+        height: 16rem !important;
+        width: 11rem !important;
+    }
+    .main-headings{
+        margin-bottom: 1.5rem;
+    }
+    .similars{
+        margin-bottom: 1rem;
+    }
+}
+
+@media only screen and (max-width: 595px){
+    .grp{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .right{
+        width: 90vw;
+        padding-left: 0rem;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .main-headings{
+        margin-left: 0;
+    }
+    
+    .icon{
+        font-size: 1.8rem !important;
+    }
 }

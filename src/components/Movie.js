@@ -13,12 +13,21 @@ function Movie() {
     const {id} = useParams();
     const dispatch = useDispatch();
     const movie = useSelector(getMovieDetails)
+    const [screenSize, setScreenSize] = useState(null);
 
     useEffect(() => {
         dispatch(fetchOneMovie(id));
         window.scrollTo(0, 0);
         return dispatch(cleanPreviousMovieDetails());
       }, [dispatch, id]);
+
+      useEffect(() => {
+        const updateWindowDimensions = () => {
+          setScreenSize(window.innerWidth);
+        };
+        window.addEventListener("resize", updateWindowDimensions);
+        return () => window.removeEventListener("resize", updateWindowDimensions) 
+      }, []);
 
     return (
         <>
@@ -61,8 +70,6 @@ function Movie() {
                 </div>
             </div>
 
-
-
             <div className='main-headings'>
                 <span className='head-name'>Actors</span><ArrowForwardIosIcon className='icon' />
             </div>
@@ -77,7 +84,7 @@ function Movie() {
                     chevronWidth={60}
                     disableSwipe={false}
                     alwaysShowChevrons={false}
-                    numberOfCards={6}
+                    numberOfCards={screenSize<=970 ? (screenSize <= 740 ? (screenSize <= 595 ? 3 : 4) : 5) : 6}
                     slidesToScroll={4}
                     outsideChevron={true}
                     showSlither={false}
@@ -122,7 +129,7 @@ function Movie() {
                     chevronWidth={60}
                     disableSwipe={false}
                     alwaysShowChevrons={false}
-                    numberOfCards={5}
+                    numberOfCards={screenSize<=970 ? (screenSize <= 710 ? (screenSize <= 595 ? 2 : 3) : 4) : 5}
                     slidesToScroll={4}
                     outsideChevron={true}
                     showSlither={false}
@@ -149,11 +156,7 @@ function Movie() {
                     }
                 </ItemsCarousel>
             </div>
-
-
-
         </div>
-                
                 )
             }
         </>

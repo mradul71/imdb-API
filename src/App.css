@@ -4,15 +4,87 @@
     font-family: 'Roboto', sans-serif;
   }
   .App{
-    width: 100%;
+    min-width: 100%;
     min-height: 100vh;
     background-color: #39445a;
   }
-  .back{
+  .header{
     display: flex;
-    justify-content: space-between;
+    position: relative;
+    padding: 3rem 5.5rem 1rem 5.5rem;
     align-items: center;
-    width: 15%;
-    padding-left: 5.5rem;
-    padding-top: 3rem;
+    justify-content: space-between;
+    color: white;
+  }
+  .movieApp{
+    display: flex;
+    font-size: 2.4rem;
+    font-weight: 600;
+  }
+  .back, .back-two{
+    display: flex;
+    align-items: center;
+  }
+  .back-two{
+    visibility: hidden;
+  }
+
+  @media only screen and (max-width: 1210px) {
+    .header{
+      padding: 1rem 4.2rem 1rem 4.2rem;
+    }
+    .movieApp{
+      display: flex;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+  }
+  @media only screen and (max-width: 1085px){
+    .header{
+      padding: 0.8rem 4.2rem 1rem 4.2rem;
+    }
+    .back{
+      font-size: 0.9rem;
+    }
+    .movieApp{
+      font-size: 1.5rem;
+    }
+  }
+  @media only screen and (max-width: 900px){
+    .header{
+      padding: 0.8rem 3rem 1rem 3rem;
+    }
+    .back .home-back{
+      visibility: hidden;
+    }
+  }
+  @media only screen and (max-width: 620px){
+    .header{
+      padding: 0.8rem 2rem 1rem 2rem;
+    }
+  }
+  @media only screen and (max-width: 525px){
+    .header{
+      padding: 0.8rem 1.5rem 1rem 1.5rem;
+    }
+    .back .icon{
+      font-size: 1.4rem !important;
+    }
+    .movieApp{
+      font-size: 1.3rem;
+    }
+  }
+
+  @media only screen and (max-width: 473px){
+    .back .icon{
+      font-size: 1.4rem !important;
+    }
+    .movieApp{
+      font-size: 1.1rem;
+    }
+  }
+  @media only screen and (max-width: 445px){
+    .movieApp{
+      font-size: 0.9rem;
+    }
   }

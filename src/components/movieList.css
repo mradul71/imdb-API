@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem 0 1.5rem 0;
+    padding: 0 0 1.5rem 0;
 }
 
 .loading{
@@ -42,38 +42,30 @@
 }
 
 .search-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 7rem;
     border: none;
     margin-top: 0.7rem;
     border-radius: 4px;
 }
 
-.search-field{
-    width: 20rem;
-}
-
-.result{
-    color: white;
-    font-weight: 200;
-    margin-top: 2rem;
-}
-
 .row{
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-left: auto;
-    margin-right: 3rem;
 }
 
 .card{
-    height: 29rem;
+    height: 30rem;
     width: 18rem;
     margin: 1rem auto 0 auto;
     background-color: #282c34;
     box-shadow: 0px 0px 12px white;
-    transition: 0.2s all ease-in-out;
+    transition: 0.3s all ease-in-out;
 }
+
 .card:hover{
     transform: scale(1.07);
 }
@@ -97,10 +89,215 @@
 }
 .card-text{
     display: flex;
-    margin: 1rem 0.6rem 0 0.6rem; 
+    margin: 1rem auto 0 auto; 
     justify-content: space-between;
 }
 .card-text-search{
     display: flex;
     justify-content: center;
+}
+
+@media only screen and (max-width: 1334px) {
+    .card{
+        height: 30rem;
+        width: 16rem;
+        box-shadow: 0px 0px 8px white;
+        transition: 0.2s all ease-in-out;
+    }
+    
+    .card:hover{
+        transform: scale(1.5);
+    }
+    
+    .card-image{
+        width: 14rem; 
+        height: 21rem;
+        margin-top: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 1213px) {
+    .searching{
+        padding: 0 0 1.5rem 0;
+    }
+    .search-field{
+        width: 25rem !important;
+        height: 1.8rem;
+    }
+    .search-button{
+        width: 5rem;
+    }
+    .card{
+        height: 26rem;
+        width: 14rem;
+    }
+    .card-image{
+        width: 12rem; 
+        height: 18rem;
+        margin-top: 0.8rem;
+    }
+    .card-title, .card-text{
+        color: white;
+        font-size: 0.9rem;
+    }
+    .card-text{
+        display: flex;
+        margin: 0.8rem auto 0 auto;
+    }
+}
+
+@media only screen and (max-width: 1060px) {
+    .card{
+        box-shadow: 0px 0px 5px white;
+    }
+}
+
+@media only screen and (max-width: 1030px) {
+    .searching{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .search-field{
+        width: 20rem !important;
+    }
+    .search-button{
+        margin-top: 0rem;
+        font-size: 0.9rem;
+        width: 5rem;
+        height: 2rem;
+        margin-left: 1rem;
+    }
+    .card{
+        height: 25rem;
+        width: 14rem;
+    }
+    .card-image{
+        width: 12rem; 
+        height: 17rem;
+    }
+    .card-title, .card-text{
+        color: white;
+        font-size: 0.8rem;
+    }
+    .card-text{
+        display: flex;
+        margin: 0.7rem auto 0 auto;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .search-field{
+        width: 17rem !important;
+    }
+    .search-button{
+        margin-top: 0rem;
+        font-size: 0.76rem;
+        width: 4rem;
+        height: 2rem;
+        margin-left: 1rem;
+    }
+}
+@media only screen and (max-width: 780px) {
+    .search-field{
+        width: 17rem !important;
+    }
+    .search-button{
+        margin-top: 0rem;
+        font-size: 0.76rem;
+        width: 4rem;
+        height: 2rem;
+        margin-left: 1rem;
+    }
+    .card{
+        height: 23rem;
+        width: 12rem;
+    }
+    .card-image{
+        width: 10rem; 
+        height: 15rem;
+    }
+    .card-title, .card-text{
+        color: white;
+        font-size: 0.9rem !important;
+    }
+    .card-text{
+        display: flex;
+        font-size: 0.8rem !important;
+        margin: 0.7rem auto 0 auto;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .search-field{
+        width: 15rem !important;
+        height: 1.5rem;
+    }
+    .search-button{
+        margin-top: 0rem;
+        font-size: 0.58rem;
+        width: 3rem;
+        height: 1.5rem;
+        margin-left: 1rem;
+    }
+    .card{
+        height: 25rem;
+        width: 14rem;
+    }
+    .card-image{
+        width: 12rem; 
+        height: 17rem;
+    }
+    .card-title, .card-text{
+        color: white;
+        font-size: 0.9rem !important;
+    }
+    .card-text{
+        display: flex;
+        font-size: 0.8rem !important;
+        margin: 0.7rem auto 0 auto;
+    }
+}
+@media only screen and (max-width: 575px){
+    
+    .card{
+        height: 30rem;
+        width: 16rem;
+    }
+    .card-image{
+        width: 14rem;
+        height: 22rem !important; 
+    }
+    .card-title, .card-text{
+        color: white;
+        font-size: 1rem !important;
+    }
+    .card-text{
+        display: flex;
+        font-size: 0.9rem !important;
+        margin: 0.9rem auto 0 auto;
+    }
+}
+
+@media only screen and (max-width: 473px){
+    .search-field{
+        width: 12rem !important;
+    }
+}
+@media only screen and (max-width: 450px){
+    .searching{
+        display: flex;
+        flex-direction: column;
+    }
+    .search-field{
+        width: 15rem !important;
+        height: 1.5rem;
+    }
+    .search-button{
+        margin-top: 0.7rem;
+        font-size: 0.8rem;
+        width: 5rem;
+        height: 2rem;
+        margin-left: 1rem;
+    }
 }
