@@ -1,42 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import {fetchAllMovies, fetchOneMovie} from "../imdb.service";
 
-export const fetchAllMovies = createAsyncThunk(
-    'movie/fetchAllMovies',
-    async (search) => {
-        if(search===""){
-            const data = await axios.get(
-                `https://imdb-api.com/en/API/Top250Movies/${process.env.REACT_APP_KEY}`
-            );
-            return data.data.items;
-        }
-        else{
-            const data = await axios.get(
-                `https://imdb-api.com/en/API/SearchTitle/${process.env.REACT_APP_KEY}/${search}`
-            );
-            return data.data.results;
-        }
-    }
-);
-
-export const fetchOneMovie = createAsyncThunk(
-    'movie/fetchOneMovie',
-    async (id) => {
-        const data = await axios.get(
-            `https://imdb-api.com/en/API/Title/${process.env.REACT_APP_KEY}/${id}/FullCast,Posters,Images,Ratings,`
-        );
-      return data.data;
-    }
-);
-
-const initialState = {
-    movies: [],
-    oneMovie: {}
-}
+export const moviesAdapter = createEntityAdapter({
+    selectId: (movie) => movie.id,
+})
 
 const movieSlice = createSlice({
     name: "movies",
-    initialState,
+    initialState: moviesAdapter.getInitialState({loading: false}),
     reducers: {
         cleanPreviousMovieDetails: (state)=>{
             state.oneMovie = {};
@@ -48,7 +19,7 @@ const movieSlice = createSlice({
         },
         [fetchAllMovies.fulfilled]: (state, {payload})=>{
             console.log("Fetched successfully :) ");
-            return {...state, movies: payload};
+            moviesAdapter.setAll(state, payload);
         },
         [fetchAllMovies.rejected]: ()=>{
             console.log("Rejected :( ");
@@ -59,8 +30,13 @@ const movieSlice = createSlice({
         }
     }
 })
+//stuck how to perform that one movie detail part
+//till now i have done that movie adapter will have entities of all movies
+//but how to add and get a single movie if present in the adapter
 
 export const {cleanPreviousMovieDetails} = movieSlice.actions;
-export const getAllMovies = (state) => state.movies.movies
+export const getAllMovies = moviesAdapter.getSelectors(
+    (state) => state.movies
+)
 export const getMovieDetails = (state) => state.movies.oneMovie
 export default movieSlice.reducer;

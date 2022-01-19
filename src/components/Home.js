@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { fetchAllMovies } from '../features/movies/movieSlice';
+import { fetchAllMovies } from '../features/imdb.service';
 import MoviesList from './MoviesList';
 
 function Home() {

@@ -5,7 +5,8 @@ import ItemsCarousel from "react-items-carousel";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useDispatch, useSelector } from 'react-redux';
-import { cleanPreviousMovieDetails, fetchOneMovie, getMovieDetails } from '../features/movies/movieSlice';
+import {fetchOneMovie} from "../features/imdb.service"
+import { cleanPreviousMovieDetails, getMovieDetails } from '../features/movies/movieSlice';
 
 function Movie() {
     const [activeActor, setActiveActor] = useState(0);
@@ -13,7 +14,7 @@ function Movie() {
     const {id} = useParams();
     const dispatch = useDispatch();
     const movie = useSelector(getMovieDetails)
-    const [screenSize, setScreenSize] = useState(null);
+    const [screenSize, setScreenSize] = useState(1090);
 
     useEffect(() => {
         dispatch(fetchOneMovie(id));

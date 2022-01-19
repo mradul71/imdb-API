@@ -16,7 +16,7 @@ function MoviesList() {
         return () => window.removeEventListener("resize", updateWindowDimensions) 
     
       }, []);
-    const movies = useSelector(getAllMovies)
+    const movies = useSelector(getAllMovies.selectAll)
     return (
         <>
         {
