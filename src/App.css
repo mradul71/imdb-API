@@ -4,13 +4,12 @@
     font-family: 'Roboto', sans-serif;
   }
   .App{
-    min-width: 100%;
+    min-width: 100vw;
     min-height: 100vh;
     background-color: #39445a;
   }
   .header{
     display: flex;
-    position: relative;
     padding: 3rem 5.5rem 1rem 5.5rem;
     align-items: center;
     justify-content: space-between;
@@ -57,6 +56,9 @@
     .back .home-back{
       visibility: hidden;
     }
+    .back-two .home-back{
+      visibility: hidden;
+    }
   }
   @media only screen and (max-width: 620px){
     .header{
@@ -86,5 +88,36 @@
   @media only screen and (max-width: 445px){
     .movieApp{
       font-size: 0.9rem;
+    }
+  }
+  @media only screen and (max-width: 538px){
+    .App{
+      min-width: 103vw;
+    }
+  }
+  @media only screen and (max-width: 494px){
+    .App{
+      min-width: 106vw;
+    }
+  }
+  
+  @media only screen and (max-width: 460px){
+    .App{
+      min-width: 108vw;
+    }
+  }
+  @media only screen and (max-width: 425px){
+    .App{
+      min-width: 110vw;
+    }
+  }
+  @media only screen and (max-width: 396px){
+    .App{
+      min-width: 112vw;
+    }
+  }
+  @media only screen and (max-width: 370px){
+    .App{
+      min-width: 114vw;
     }
   }

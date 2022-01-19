@@ -12,7 +12,6 @@ function App() {
           <Link to='/' className='links'>
             <div className='back'>
               <div><ArrowBackIosNewIcon className='icon' /></div>
-              <div className='home-back'>Back to Home</div>
             </div>
           </Link>
           <div className='movieApp'>
@@ -20,7 +19,6 @@ function App() {
           </div>
           <div className='back-two'>
               <div><ArrowBackIosNewIcon className='icon' /></div>
-              <div>Back to Home</div>
             </div>
         </div>
           <Routes>
