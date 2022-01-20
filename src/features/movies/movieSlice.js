@@ -30,9 +30,9 @@ const movieSlice = createSlice({
         },
         [fetchOneMovie.fulfilled]: (state, {payload})=>{
             console.log("Updated successfully :) ");
-            //can't update :(
-            moviesAdapter.removeOne(state, payload.id);
-            moviesAdapter.addOne(state, payload);
+            moviesAdapter.setOne(state, payload);
+            // moviesAdapter.removeOne(state, payload.id);
+            // moviesAdapter.addOne(state, payload);
         },
         [fetchOneMovie.rejected]: ()=>{
             console.log("Updation failed :(");
