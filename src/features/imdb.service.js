@@ -3,19 +3,21 @@ import axios from "axios";
 
 export const fetchAllMovies = createAsyncThunk(
     'movie/fetchAllMovies',
+    async () => {
+        const data = await axios.get(
+            `https://imdb-api.com/en/API/Top250Movies/${process.env.REACT_APP_KEY}`
+        );
+        return data.data.items;
+    }
+);
+
+export const fetchSearchMovies = createAsyncThunk(
+    'movie/fetchSearchMovies',
     async (search) => {
-        if(search===""){
-            const data = await axios.get(
-                `https://imdb-api.com/en/API/Top250Movies/${process.env.REACT_APP_KEY}`
-            );
-            return data.data.items;
-        }
-        else{
-            const data = await axios.get(
-                `https://imdb-api.com/en/API/SearchTitle/${process.env.REACT_APP_KEY}/${search}`
-            );
-            return data.data.results;
-        }
+        const data = await axios.get(
+            `https://imdb-api.com/en/API/SearchTitle/${process.env.REACT_APP_KEY}/${search}`
+        );
+        return data.data.results;
     }
 );
 

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import Home from './components/Home';
 import Movie from './components/Movie';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import SearchedMovies from './components/SearchedMovies'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         </div>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
+            <Route exact path="/search-results/:search" element={<SearchedMovies />}></Route>
             <Route path="/movie/:id" element={<Movie />}></Route>
           </Routes>
       </div>
