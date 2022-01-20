@@ -4,9 +4,9 @@ import {fetchAllMovies, fetchOneMovie, fetchSearchMovies} from "../imdb.service"
 export const moviesAdapter = createEntityAdapter({
     selectId: (movie) => movie.id,
 })
-export const searchesAdapter = createEntityAdapter({
-    selectId: (movie) => movie.id,
-})
+// export const searchesAdapter = createEntityAdapter({
+//     selectId: (movie) => movie.id,
+// })
 
 const movieSlice = createSlice({
     name: "movies",
@@ -24,16 +24,16 @@ const movieSlice = createSlice({
         [fetchAllMovies.rejected]: ()=>{
             console.log("Fetching Failed :( ");
         },
-        [fetchSearchMovies.pending]: ()=>{
-            console.log("Searchh results pending...");
-        },
-        [fetchSearchMovies.fulfilled]: (state, {payload})=>{
-            console.log("Searchh results fetched successfully :) ");
-            searchesAdapter.setAll(state, payload);
-        },
-        [fetchSearchMovies.rejected]: ()=>{
-            console.log("Searchh results fetching Failed :( ");
-        },
+        // [fetchSearchMovies.pending]: ()=>{
+        //     console.log("Searchh results pending...");
+        // },
+        // [fetchSearchMovies.fulfilled]: (state, {payload})=>{
+        //     console.log("Searchh results fetched successfully :) ");
+        //     searchesAdapter.setAll(state, payload);
+        // },
+        // [fetchSearchMovies.rejected]: ()=>{
+        //     console.log("Searchh results fetching Failed :( ");
+        // },
         [fetchOneMovie.pending]: (s)=>{
             console.log("Updating Pending...");
         },
@@ -47,5 +47,5 @@ const movieSlice = createSlice({
     }
 })
 export const movieSelectors= moviesAdapter.getSelectors(state => state.movies);
-export const searchSelectors= searchesAdapter.getSelectors(state => state.searchedMovies);
+// export const searchSelectors= searchesAdapter.getSelectors(state => state.searchedMovies);
 export default movieSlice.reducer;

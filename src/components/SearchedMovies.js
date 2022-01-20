@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { Card, Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom';
-import {searchSelectors} from '../features/movies/movieSlice'
+import {searchSelectors} from '../features/searchedMovies/searchedMovieSlice'
 import { useDispatch } from 'react-redux';
 import './movieList.css';
 import { fetchSearchMovies } from '../features/imdb.service';
