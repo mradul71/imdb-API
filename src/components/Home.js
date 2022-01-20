@@ -15,10 +15,6 @@ function Home() {
         dispatch(fetchAllMovies(search));
         setSearch("");
       }
-    
-      useEffect(() => {
-        dispatch(fetchAllMovies(search));
-      }, [dispatch]);
 
     return (
       <>

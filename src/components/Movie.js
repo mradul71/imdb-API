@@ -5,21 +5,25 @@ import ItemsCarousel from "react-items-carousel";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useDispatch, useSelector } from 'react-redux';
-import {fetchOneMovie} from "../features/imdb.service"
-import { cleanPreviousMovieDetails, getMovieDetails } from '../features/movies/movieSlice';
+import { cleanPreviousMovieDetails, movieSelectors } from '../features/movies/movieSlice';
+import { fetchOneMovie } from '../features/imdb.service';
 
 function Movie() {
     const [activeActor, setActiveActor] = useState(0);
     const [activeSimilar, setActiveSimilar] = useState(0);
     const {id} = useParams();
     const dispatch = useDispatch();
-    const movie = useSelector(getMovieDetails)
-    const [screenSize, setScreenSize] = useState(1090);
+    const [screenSize, setScreenSize] = useState(null);
+    let movie = useSelector((state) => movieSelectors.selectById(state, id));
 
     useEffect(() => {
-        dispatch(fetchOneMovie(id));
+        if(movie.plot){
+            console.log("Have complete info :)");
+        }
+        else{
+            dispatch(fetchOneMovie(id));
+        }
         window.scrollTo(0, 0);
-        return dispatch(cleanPreviousMovieDetails());
       }, [dispatch, id]);
 
       useEffect(() => {
@@ -30,10 +34,11 @@ function Movie() {
         return () => window.removeEventListener("resize", updateWindowDimensions) 
       }, []);
 
+      
     return (
         <>
         {
-            Object.keys(movie).length === 0 ? 
+            !movie.plot ? 
             <div className='loading'>Loading...</div>
             :
             (

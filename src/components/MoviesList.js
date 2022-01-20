@@ -2,21 +2,31 @@ import React, {useEffect, useState} from 'react'
 import { Card, Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { getAllMovies } from '../features/movies/movieSlice'
+import {movieSelectors} from '../features/movies/movieSlice'
+import { useDispatch } from 'react-redux';
+import { fetchAllMovies } from '../features/imdb.service';
 import './movieList.css';
 
 function MoviesList() {
     const [screenSize, setScreenSize] = useState(null);
+    let movies = useSelector(movieSelectors.selectAll);
+    
+    const dispatch = useDispatch(); 
     
     useEffect(() => {
+        if(movies.length === 0){
+            console.log("empty")
+            dispatch(fetchAllMovies(""));
+        }
+        else{
+            console.log("filled")
+        }
         const updateWindowDimensions = () => {
           setScreenSize(window.innerWidth);
         };
         window.addEventListener("resize", updateWindowDimensions);
         return () => window.removeEventListener("resize", updateWindowDimensions) 
-    
       }, []);
-    const movies = useSelector(getAllMovies.selectAll)
     return (
         <>
         {
