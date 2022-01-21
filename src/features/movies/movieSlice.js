@@ -1,42 +1,52 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import {fetchAllMovies, fetchOneMovie} from "../imdb.service";
+import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import {fetchAllMovies, fetchOneMovie} from "../../services/imdb.service";
 
 export const moviesAdapter = createEntityAdapter({
     selectId: (movie) => movie.id,
 })
 
+//thunks
+export const allMovies = createAsyncThunk(
+    'movie/allMovies',
+    async () => {
+        const data = await fetchAllMovies();
+        return data;
+    }
+);
+export const oneMovie = createAsyncThunk(
+    'movie/oneMovie',
+    async (id) => {
+        const data = await fetchOneMovie(id);
+        return data;
+    }
+);
+
 const movieSlice = createSlice({
     name: "movies",
-    initialState: moviesAdapter.getInitialState({loading: false}),
-    reducers: {
-        cleanPreviousMovieDetails: (state)=>{
-            state.oneMovie = {};
-        }
-    },
+    initialState: moviesAdapter.getInitialState(),
+    reducers: {},
     extraReducers: {
-        [fetchAllMovies.pending]: ()=>{
+        [allMovies.pending]: ()=>{
             console.log("Pending...");
         },
-        [fetchAllMovies.fulfilled]: (state, {payload})=>{
+        [allMovies.fulfilled]: (state, {payload})=>{
             console.log("Fetched successfully :) ");
             moviesAdapter.setAll(state, payload);
         },
-        [fetchAllMovies.rejected]: ()=>{
-            console.log("Rejected :( ");
+        [allMovies.rejected]: ()=>{
+            console.log("Fetching Failed :( ");
         },
-        [fetchOneMovie.fulfilled]: (state, {payload})=>{
-            console.log("Fetched successfully :) ");
-            return {...state, oneMovie: payload};
+        [oneMovie.pending]: (s)=>{
+            console.log("Updating Pending...");
+        },
+        [oneMovie.fulfilled]: (state, {payload})=>{
+            console.log("Updated successfully :) ");
+            moviesAdapter.setOne(state, payload);
+        },
+        [oneMovie.rejected]: ()=>{
+            console.log("Updation failed :(");
         }
     }
 })
-//stuck how to perform that one movie detail part
-//till now i have done that movie adapter will have entities of all movies
-//but how to add and get a single movie if present in the adapter
-
-export const {cleanPreviousMovieDetails} = movieSlice.actions;
-export const getAllMovies = moviesAdapter.getSelectors(
-    (state) => state.movies
-)
-export const getMovieDetails = (state) => state.movies.oneMovie
+export const movieSelectors= moviesAdapter.getSelectors(state => state.movies);
 export default movieSlice.reducer;

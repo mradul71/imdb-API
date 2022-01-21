@@ -1,39 +1,27 @@
 import React, {useEffect, useState} from 'react'
 import { Card, Col, Row, Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
-import {movieSelectors} from '../features/movies/movieSlice'
+import { Link, useParams } from 'react-router-dom';
+import {searchSelectors} from '../features/searchedMovies/searchedMovieSlice'
 import { useDispatch } from 'react-redux';
-import { allMovies } from "../features/movies/movieSlice";
 import './movieList.css';
+import { searchMovies } from '../features/searchedMovies/searchedMovieSlice';
 
-function MoviesList() {
-    const [screenSize, setScreenSize] = useState(null);
+function SearchedMovies() {
+    const {search} = useParams();
     const [loading, setLoading] = useState(false);
-    let movies = useSelector((state) => movieSelectors.selectAll(state));
-    
     const dispatch = useDispatch(); 
-
-    const fetchAllMovies = async () => {
+    const fetchSearchedMovie = async (s) => {
         setLoading(true);
-        await dispatch(allMovies());
+        await dispatch(searchMovies(s));
         setLoading(false);
      }
     
     useEffect(() => {
-        if(movies.length === 0){
-            console.log("empty")
-            fetchAllMovies();
-        }
-        else{
-            console.log("filled")
-        }
-        const updateWindowDimensions = () => {
-          setScreenSize(window.innerWidth);
-        };
-        window.addEventListener("resize", updateWindowDimensions);
-        return () => window.removeEventListener("resize", updateWindowDimensions) 
-      }, []);
+        fetchSearchedMovie(search);
+      }, [search]);
+    let movies = useSelector((state) => searchSelectors.selectAll(state));
+    console.log(movies);
     return (
         <>
         {
@@ -54,7 +42,7 @@ function MoviesList() {
                                 <Card.Body>
                                 <Card.Title className="card-title">{c.title}</Card.Title>
                                 <Card.Text className='card-text'>
-                                    <div className='year'><p>Year: {c.year || c.description}</p></div>
+                                    <div className='year'><p>Year: {c.description}</p></div>
                                     {c.imDbRating ? <div className='rating'><p>Rating: {c.imDbRating}</p></div> : null}
                                 </Card.Text>
                                 </Card.Body>
@@ -71,4 +59,4 @@ function MoviesList() {
     )
 }
 
-export default MoviesList
+export default SearchedMovies

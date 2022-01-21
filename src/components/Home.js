@@ -1,24 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { fetchAllMovies } from '../features/imdb.service';
+import { useNavigate } from 'react-router-dom';
 import MoviesList from './MoviesList';
 
 function Home() {
-
-    const dispatch = useDispatch(); 
+    let navigate = useNavigate();
 
     const [search, setSearch] = useState("");
       
-      const triggerSearch = (e) => {
-        e.preventDefault();
-        dispatch(fetchAllMovies(search));
-        setSearch("");
-      }
-    
-      useEffect(() => {
-        dispatch(fetchAllMovies(search));
-      }, [dispatch]);
+    const triggerSearch = (e) => {
+      navigate(`/search-results/${search}`);
+      setSearch("");
+    }
 
     return (
       <>
