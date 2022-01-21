@@ -1,23 +1,33 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import {fetchSearchMovies} from "../imdb.service";
+import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import {fetchSearchMovies} from "../../services/imdb.service";
 export const searchesAdapter = createEntityAdapter({
     selectId: (movie) => movie.id,
 })
 
+//thunks
+export const searchMovies = createAsyncThunk(
+    'movie/searchMovies',
+    async (search) => {
+        const data = await fetchSearchMovies(search);
+        return data;
+    }
+);
+
+
 const searchedMovieSlice = createSlice({
     name: "searchedMovies",
-    initialState: searchesAdapter.getInitialState({loading: false}),
+    initialState: searchesAdapter.getInitialState(),
     reducers: {},
     extraReducers: {
-        [fetchSearchMovies.pending]: ()=>{
-            console.log("Searchh results pending...");
+        [searchMovies.pending]: ()=>{
+            console.log("Search results pending...");
         },
-        [fetchSearchMovies.fulfilled]: (state, {payload})=>{
-            console.log("Searchh results fetched successfully :) ");
+        [searchMovies.fulfilled]: (state, {payload})=>{
+            console.log("Search results fetched successfully :) ");
             searchesAdapter.setAll(state, payload);
         },
-        [fetchSearchMovies.rejected]: ()=>{
-            console.log("Searchh results fetching Failed :( ");
+        [searchMovies.rejected]: ()=>{
+            console.log("Search results fetching Failed :( ");
         }
     }
 })

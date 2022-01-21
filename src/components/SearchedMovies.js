@@ -1,27 +1,34 @@
 import React, {useEffect, useState} from 'react'
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row, Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom';
 import {searchSelectors} from '../features/searchedMovies/searchedMovieSlice'
 import { useDispatch } from 'react-redux';
 import './movieList.css';
-import { fetchSearchMovies } from '../features/imdb.service';
+import { searchMovies } from '../features/searchedMovies/searchedMovieSlice';
 
-function MoviesList() {
+function SearchedMovies() {
     const {search} = useParams();
-    
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch(); 
+    const fetchSearchedMovie = async (s) => {
+        setLoading(true);
+        await dispatch(searchMovies(s));
+        setLoading(false);
+     }
     
     useEffect(() => {
-        dispatch(fetchSearchMovies(search));
-      }, [dispatch, search]);
-    let movies = useSelector(searchSelectors.selectAll);
+        fetchSearchedMovie(search);
+      }, [search]);
+    let movies = useSelector((state) => searchSelectors.selectAll(state));
     console.log(movies);
     return (
         <>
         {
             movies.length <=0 ? 
-            <div className='loading'>Loading...</div>
+            <Spinner variant='light' style={{display: "flex", marginLeft: "auto", marginRight: "auto"}} animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
             :
             (
             <div className='movies'>
@@ -52,4 +59,4 @@ function MoviesList() {
     )
 }
 
-export default MoviesList
+export default SearchedMovies

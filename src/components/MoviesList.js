@@ -1,22 +1,29 @@
 import React, {useEffect, useState} from 'react'
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row, Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import {movieSelectors} from '../features/movies/movieSlice'
 import { useDispatch } from 'react-redux';
-import { fetchAllMovies } from '../features/imdb.service';
+import { allMovies } from "../features/movies/movieSlice";
 import './movieList.css';
 
 function MoviesList() {
     const [screenSize, setScreenSize] = useState(null);
-    let movies = useSelector(movieSelectors.selectAll);
+    const [loading, setLoading] = useState(false);
+    let movies = useSelector((state) => movieSelectors.selectAll(state));
     
     const dispatch = useDispatch(); 
+
+    const fetchAllMovies = async () => {
+        setLoading(true);
+        await dispatch(allMovies());
+        setLoading(false);
+     }
     
     useEffect(() => {
         if(movies.length === 0){
             console.log("empty")
-            dispatch(fetchAllMovies(""));
+            fetchAllMovies();
         }
         else{
             console.log("filled")
@@ -31,7 +38,9 @@ function MoviesList() {
         <>
         {
             movies.length <=0 ? 
-            <div className='loading'>Loading...</div>
+            <Spinner variant='light' style={{display: "flex", marginLeft: "auto", marginRight: "auto"}} animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
             :
             (
             <div className='movies'>

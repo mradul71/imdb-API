@@ -5,41 +5,45 @@ import ItemsCarousel from "react-items-carousel";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useDispatch, useSelector } from 'react-redux';
-import { cleanPreviousMovieDetails, movieSelectors } from '../features/movies/movieSlice';
-import { fetchOneMovie } from '../features/imdb.service';
+import { movieSelectors } from '../features/movies/movieSlice';
+import { oneMovie } from "../features/movies/movieSlice";
+import { Spinner } from 'react-bootstrap';
 
 function Movie() {
     const [activeActor, setActiveActor] = useState(0);
     const [activeSimilar, setActiveSimilar] = useState(0);
+    const [loading, setLoading] = useState(false);
     const {id} = useParams();
     const dispatch = useDispatch();
-    const [screenSize, setScreenSize] = useState(null);
+    const [screenSize, setScreenSize] = useState(1090);
     let movie = useSelector((state) => movieSelectors.selectById(state, id));
+
+    const fetchMovie = async (id) => {
+        setLoading(true);
+        await dispatch(oneMovie(id));
+        setLoading(false);
+     }
 
     useEffect(() => {
         if(movie.plot){
             console.log("Have complete info :)");
         }
         else{
-            dispatch(fetchOneMovie(id));
+            fetchMovie(id);
         }
         window.scrollTo(0, 0);
-      }, [dispatch, id]);
-
-      useEffect(() => {
         const updateWindowDimensions = () => {
-          setScreenSize(window.innerWidth);
-        };
-        window.addEventListener("resize", updateWindowDimensions);
-        return () => window.removeEventListener("resize", updateWindowDimensions) 
-      }, []);
-
+            setScreenSize(window.innerWidth);
+          };
+          window.addEventListener("resize", updateWindowDimensions);
+          return () => window.removeEventListener("resize", updateWindowDimensions) 
+      }, [id]);
       
     return (
-        <>
-        {
             !movie.plot ? 
-            <div className='loading'>Loading...</div>
+            <Spinner variant='light' style={{display: "flex", marginLeft: "auto", marginRight: "auto"}} animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
             :
             (
         <div className='movie' key={movie.id}>
@@ -163,9 +167,7 @@ function Movie() {
                 </ItemsCarousel>
             </div>
         </div>
-                )
-            }
-        </>
+        )
     )
 }
 
